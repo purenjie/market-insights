@@ -130,8 +130,9 @@ class RedRocketDataSource:
 
         params = {
             "securityCode": security_code,
-            "time": current_time_ms,
+            "valuationType": "DID",
             "timeInterval": "last_5_years",
+            "ts": str(current_time_ms),
         }
 
         try:
@@ -142,8 +143,23 @@ class RedRocketDataSource:
             if not isinstance(data, dict):
                 raise DataSourceError(f"Unexpected response type for {security_code}")
 
+            # Check response code
+            if data.get("code") != "200":
+                LOG.warning(
+                    "API returned non-200 code for %s: %s %s",
+                    security_code,
+                    data.get("code"),
+                    data.get("msg"),
+                )
+                return None
+
             # Extract DID from response
-            did_value = data.get("did")
+            # Reason: When valuationType=DID, the dividend yield is in 'valuation' field
+            payload_data = data.get("data")
+            if not isinstance(payload_data, dict):
+                return None
+
+            did_value = payload_data.get("valuation")
             return parse_float(did_value)
 
         except requests.RequestException as exc:

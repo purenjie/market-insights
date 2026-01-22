@@ -5,6 +5,7 @@ This notifier uses python-telegram-bot library to send notifications.
 
 from __future__ import annotations
 
+import asyncio
 import logging
 from pathlib import Path
 
@@ -42,31 +43,8 @@ class TelegramNotifier(BaseNotifier):
             return False
 
         try:
-            # Import here to avoid dependency if not used
-            from telegram import Bot
-            from telegram.error import TelegramError
-
-            bot = Bot(token=self.config.bot_token)
-
-            # Send text message
-            bot.send_message(
-                chat_id=self.config.chat_id,
-                text=f"*{payload.title}*\n\n{payload.message}",
-                parse_mode="Markdown",
-            )
-
-            # Send attachments (images)
-            for attachment in payload.attachments:
-                if attachment.exists():
-                    with open(attachment, "rb") as f:
-                        bot.send_photo(chat_id=self.config.chat_id, photo=f)
-
-            LOG.info("Telegram notification sent successfully")
-            return True
-
-        except ImportError:
-            LOG.error("python-telegram-bot library not installed")
-            return False
+            # Reason: python-telegram-bot v20+ uses async API
+            return asyncio.run(self._send_async(payload))
         except Exception as exc:
             LOG.exception("Failed to send Telegram notification")
             return False
@@ -78,3 +56,47 @@ class TelegramNotifier(BaseNotifier):
             True if configured, False otherwise
         """
         return self.config is not None and self.config.enabled
+
+    async def _send_async(self, payload: NotificationPayload) -> bool:
+        """Send notification asynchronously.
+
+        Args:
+            payload: Notification payload
+
+        Returns:
+            True if successful, False otherwise
+        """
+        try:
+            # Import here to avoid dependency if not used
+            from telegram import Bot
+
+            bot = Bot(token=self.config.bot_token)
+
+            # Initialize bot
+            async with bot:
+                # Send text message
+                # Reason: Use plain text to avoid Markdown parsing errors
+                message_text = f"📊 {payload.title}\n\n{payload.message}"
+                await bot.send_message(
+                    chat_id=self.config.chat_id,
+                    text=message_text,
+                )
+
+                # Send attachments (images)
+                for attachment in payload.attachments:
+                    if attachment.exists():
+                        with open(attachment, "rb") as f:
+                            await bot.send_photo(
+                                chat_id=self.config.chat_id,
+                                photo=f,
+                            )
+
+            LOG.info("Telegram notification sent successfully")
+            return True
+
+        except ImportError:
+            LOG.error("python-telegram-bot library not installed")
+            return False
+        except Exception as exc:
+            LOG.exception("Failed to send Telegram notification: %s", exc)
+            return False
