@@ -1,0 +1,184 @@
+# Index Specifications
+# Migrated from index_analysis/index_etf_table.py
+
+indices:
+  # High dividend indices
+  - security_code: "932305.CSI"
+    name: "智选高股息"
+    etf_code: "159207"
+    fee_rate: "0.60%"
+
+  - security_code: "980081.CNI"
+    name: "价值100"
+    etf_code: "159263"
+    fee_rate: "0.60%"
+
+  - security_code: "980080.CNI"
+    name: "成长100"
+    etf_code: "159259"
+    fee_rate: "0.60%"
+
+  # Broad market indices
+  - security_code: "930903.CSI"
+    name: "中证A股"
+    etf_code: "563330"
+    fee_rate: "0.60%"
+
+  - security_code: "000300.SH"
+    name: "沪深300"
+    etf_code: "510300"
+    fee_rate: "0.20%"
+
+  - security_code: "930050.CSI"
+    name: "中证A50"
+    etf_code: "563080"
+    fee_rate: "0.20%"
+
+  - security_code: "000510.CSI"
+    name: "中证A500"
+    etf_code: "159361"
+    fee_rate: "0.20%"
+
+  - security_code: "000905.SH"
+    name: "中证500"
+    etf_code: "510580"
+    fee_rate: "0.20%"
+
+  - security_code: "000852.SH"
+    name: "中证1000"
+    etf_code: "159633"
+    fee_rate: "0.20%"
+
+  - security_code: "932000.CSI"
+    name: "中证2000"
+    etf_code: "159532"
+    fee_rate: "0.20%"
+
+  - security_code: "399673.SZ"
+    name: "创业板50"
+    etf_code: "159682"
+    fee_rate: "0.20%"
+
+  - security_code: "000688.SH"
+    name: "科创50"
+    etf_code: "588000"
+    fee_rate: "0.20%"
+
+  # Hong Kong indices
+  - security_code: "HSI.HI"
+    name: "恒生指数"
+    etf_code: "513660"
+    fee_rate: "0.60%"
+
+  - security_code: "HSHYLV.HI"
+    name: "恒生港股通高股息低波动"
+    etf_code: "159545"
+    fee_rate: "0.20%"
+
+  # Dividend indices
+  - security_code: "000922.CSI"
+    name: "中证红利"
+    etf_code: "515180"
+    fee_rate: "0.20%"
+
+  - security_code: "H30269.CSI"
+    name: "红利低波"
+    etf_code: "563020"
+    fee_rate: "0.20%"
+
+  - security_code: "930955.CSI"
+    name: "红利低波100"
+    etf_code: "159307"
+    fee_rate: "0.20%"
+
+  - security_code: "H30270.CSI"
+    name: "红利价值"
+    etf_code: "563700"
+    fee_rate: "0.20%"
+
+  - security_code: "931052.CSI"
+    name: "国信价值"
+    etf_code: "512040"
+    fee_rate: "0.70%"
+
+  # Cash flow indices
+  - security_code: "888888.FI"
+    name: "富时中国A股自由现金流聚焦指数"
+    etf_code: "159399"
+    fee_rate: "0.60%"
+
+  - security_code: "932366.CSI"
+    name: "300现金流"
+    etf_code: "562080"
+    fee_rate: "0.60%"
+
+  - security_code: "932368.CSI"
+    name: "800现金流"
+    etf_code: "159119"
+    fee_rate: "0.20%"
+
+  - security_code: "932365.CSI"
+    name: "中证现金流"
+    etf_code: "159232"
+    fee_rate: "0.20%"
+
+  - security_code: "980092.CNI"
+    name: "自由现金流"
+    etf_code: "159201"
+    fee_rate: "0.20%"
+
+  - security_code: "932315.CSI"
+    name: "中证红利质量"
+    etf_code: "159209"
+    fee_rate: "0.20%"
+
+  - security_code: "931468.CSI"
+    name: "红利质量"
+    etf_code: "159758"
+    fee_rate: "0.20%"
+
+  # Sector indices
+  - security_code: "931139.CSI"
+    name: "CS消费50"
+    etf_code: "515650"
+    fee_rate: "0.60%"
+
+  - security_code: "399987.SZ"
+    name: "中证酒"
+    etf_code: "512690"
+    fee_rate: "0.60%"
+
+  - security_code: "931454.CSI"
+    name: "港股通消费"
+    etf_code: "513070"
+    fee_rate: "0.20%"
+
+  - security_code: "931140.CSI"
+    name: "医药50"
+    etf_code: "515950"
+    fee_rate: "0.60%"
+
+  - security_code: "HSBIO.HI"
+    name: "恒生生物科技"
+    etf_code: "513280"
+    fee_rate: "0.20%"
+
+  - security_code: "HSTECH.HI"
+    name: "恒生科技"
+    etf_code: "513260"
+    fee_rate: "0.20%"
+
+  - security_code: "930604.CSI"
+    name: "中国互联网30"
+    etf_code: "159605"
+    fee_rate: "0.60%"
+
+  - security_code: "931186.CSI"
+    name: "中证科技"
+    etf_code: "515750"
+    fee_rate: "0.60%"
+
+  - security_code: "931238.CSI"
+    name: "SSH黄金股票"
+    etf_code: "159562"
+    fee_rate: "0.20%"

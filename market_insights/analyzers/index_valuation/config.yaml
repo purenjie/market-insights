@@ -1,0 +1,7 @@
+# Index Valuation Analyzer Configuration
+
+# Image resolution (dots per inch)
+dpi: 200
+
+# Table title
+table_title: "指数ETF估值表"
