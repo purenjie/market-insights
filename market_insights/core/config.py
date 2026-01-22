@@ -87,7 +87,7 @@ class AppConfig:
         if main_config_path.exists():
             config_data = load_yaml_config(main_config_path)
         else:
-            config_data =
+            config_data = {}
 
         return cls(
             project_root=project_root,

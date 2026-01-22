@@ -57,7 +57,19 @@ class RedRocketDataSource:
             DataSourceError: If request fails
         """
         url = f"{BASE_URL}{LIST_ENDPOINT}"
-        params = {"securityCode": security_code}
+        # Reason: Use complete parameters as in original code
+        params = {
+            "classA": "",
+            "classB": "",
+            "classC": "",
+            "orderBy": "scale",
+            "order": "desc",
+            "searchValue": security_code,
+            "isSelected": "",
+            "pageNo": "1",
+            "pageSize": "1",
+            "position": "",
+        }
 
         try:
             response = self.session.get(url, params=params, timeout=self.timeout)
@@ -68,12 +80,27 @@ class RedRocketDataSource:
             if not isinstance(data, dict):
                 raise DataSourceError(f"Unexpected response type for {security_code}")
 
-            rows = data.get("rows", [])
-            if not rows:
+            # Check response code
+            if data.get("code") != "200":
+                LOG.warning(
+                    "API returned non-200 code for %s: %s %s",
+                    security_code,
+                    data.get("code"),
+                    data.get("msg"),
+                )
+                return {"pe": None, "pb": None}
+
+            # Extract data
+            payload_data = data.get("data")
+            if not isinstance(payload_data, dict):
+                return {"pe": None, "pb": None}
+
+            items = payload_data.get("data")
+            if not isinstance(items, list) or not items:
                 LOG.warning("No data found for %s", security_code)
                 return {"pe": None, "pb": None}
 
-            row = rows[0]
+            row = items[0]
             return {
                 "pe": parse_float(row.get("pe")),
                 "pb": parse_float(row.get("pb")),
