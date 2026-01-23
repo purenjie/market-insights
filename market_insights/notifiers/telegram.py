@@ -9,10 +9,10 @@ import asyncio
 import logging
 from pathlib import Path
 
-from market_insights.notifiers.base import BaseNotifier
-from market_insights.core.protocols import NotificationPayload
 from market_insights.core.config import TelegramConfig
 from market_insights.core.exceptions import NotificationError
+from market_insights.core.protocols import NotificationPayload
+from market_insights.notifiers.base import BaseNotifier
 
 LOG = logging.getLogger(__name__)
 
@@ -74,14 +74,7 @@ class TelegramNotifier(BaseNotifier):
 
             # Initialize bot
             async with bot:
-                # Send text message
-                # Reason: Use plain text to avoid Markdown parsing errors
-                message_text = f"📊 {payload.title}\n\n{payload.message}"
-                await bot.send_message(
-                    chat_id=self.config.chat_id,
-                    text=message_text,
-                )
-
+                # Reason: 只发送图片附件，不发送总结文本消息
                 # Send attachments (images)
                 for attachment in payload.attachments:
                     if attachment.exists():

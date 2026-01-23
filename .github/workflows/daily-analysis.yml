@@ -2,8 +2,7 @@ name: Daily Market Analysis
 
 on:
   schedule:
-    # Run daily at 9:00 AM UTC (5:00 PM Beijing time)
-    - cron: '0 9 * * *'
+    - cron: "0 8 * * 1-5" # 周一到周五，UTC 08:00 = 北京时间 16:00
 
   # Allow manual trigger
   workflow_dispatch:
@@ -19,8 +18,8 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
-          cache: 'pip'
+          python-version: "3.11"
+          cache: "pip"
 
       - name: Install Chinese fonts
         run: |
